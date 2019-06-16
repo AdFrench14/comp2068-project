@@ -4,8 +4,7 @@ var User = require("../models/user");
 
 //open the page to create a new user
 exports.new = (req, res) => {
-    res.render("user/new", 
-    {
+    res.render("user/new", {
         title: "New User"
     });
 }
@@ -26,11 +25,10 @@ exports.create = (req, res) => {
 
 //Request details on a single user
 exports.show = (req, res) => {
-    User.findOne(
-            {
-                //filter
-            }
-        )
+    User.findOne({
+            _id: req.params.id,
+            user: req.session.userId
+        })
         .then((user) => {
             res.render('users/show', {
                 title: "",
@@ -45,11 +43,10 @@ exports.show = (req, res) => {
 
 //Request list of all the registered users
 exports.index = (req, res) => {
-    User.find(
-        {
-            //filter
-        }
-        )
+    User.find({
+            //Filter db request by the session userId
+            user: req.session.userId
+        })
         .then((users) => res.render('users/index',{
             title: "Users",
             users: users
@@ -63,8 +60,9 @@ exports.index = (req, res) => {
 //Open page to edit a single user's profile
 exports.edit = (req, res) => {
     User.findOne({
-        //filter
-    })
+            _id: req.params.id,
+            user: req.session.userId
+        })
         .then(user => {
             res.render('users/edit', {
                 title: "Edit Profile",
@@ -80,8 +78,9 @@ exports.edit = (req, res) => {
 //Update a users profile
 exports.update = (req, res) => {
     User.updateOne({
-        //filter
-    }, req.body.user, {runValidators: "true"})
+            _id: req.params.id,
+            user: req.session.userId
+        }, req.body.user, {runValidators: "true"})
         .then(() => {
             req.flash('success', "User updated sucessfully");
             res.redirect("user/home");
@@ -98,8 +97,9 @@ exports.update = (req, res) => {
 //delete a user
 exports.destroy = (req, res) => {
     User.deleteOne({
-        //filter
-    })
+            _id: req.params.id,
+            user: req.session.userId
+        })
         .then(() => {
             req.flash('success', 'User sucessfully deleted');
             res.redirect('/user/index');
