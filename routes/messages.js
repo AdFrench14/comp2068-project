@@ -5,9 +5,9 @@ const MessagesController = require('../controllers/messagesController');
 
 //routes
 router.get(`/`,MessagesController.index);
-router.get(`/new`,MessagesController.new);
+router.post(`/update`,MessagesController.update);
 router.get(`/:id`,MessagesController.show);
 router.post(`/`,MessagesController.create);
-//router.get(`/:id/edit`,MessagesController.edit);
+router.post(`/destroy`,MessagesController.destroy);
 
 module.exports = router;
