@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const pageRoutes = require('./routes/pageRoutes');
+const pageRoutes = require('./routes/pages');
 
 app.use('/', pageRoutes);
 
