@@ -12,7 +12,7 @@ exports.new = (req, res) => {
 //create a new user
 exports.create = (req, res) => {
     
-    User.create(req.body.User)
+    User.create(req.body.user)
         .then(() => {
             req.flash('success', "User successfully created");
             console.log('USER CREATED');
