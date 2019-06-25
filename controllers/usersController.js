@@ -4,7 +4,7 @@ var User = require("../models/user");
 
 //open the page to create a new user
 exports.new = (req, res) => {
-    res.render("user/new", {
+    res.render("users/new", {
         title: "New User"
     });
 }
