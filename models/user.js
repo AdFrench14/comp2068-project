@@ -50,12 +50,13 @@ UserSchema.pre('save', function (next) {
 //Our helper method 
 //This will allow us to compare our password to plain text
 UserSchema.methods.authenticate = function (plainPassword, callback) {
+    console.log('GOT HERE');
     //plain text, hash, callback
     bcrypt.compare(plainPassword, this.password, (err, isMatch) => {
-        if (err) return callback(err);
+        if (err) {return callback(err);}
         callback(null, isMatch);
-    })
-}
+    });
+};
 
 
 

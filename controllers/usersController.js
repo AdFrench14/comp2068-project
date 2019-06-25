@@ -11,10 +11,11 @@ exports.new = (req, res) => {
 
 //create a new user
 exports.create = (req, res) => {
+    
     User.create(req.body.User)
         .then(() => {
             req.flash('success', "User successfully created");
-            //TODO: log in the newly create user here
+            console.log('USER CREATED');
             res.redirect("/"); //redirect to the home page
         })
         .catch((err) => {
