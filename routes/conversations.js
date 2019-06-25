@@ -5,8 +5,8 @@ const ConversationsController = require('../controllers/conversationsController'
 
 //routes
 router.get(`/`, ConversationsController.index);
-router.get(`/:id`, ConversationsController.show);
 router.post(`/`, ConversationsController.create);
 router.post(`/destroy`, ConversationsController.destroy);
+router.get(`/:id`, ConversationsController.show);
 
 module.exports = router;

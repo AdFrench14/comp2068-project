@@ -35,6 +35,6 @@ exports.authenticate = (req, res) => {
 
 exports.logout = (req, res) => {
     req.session.userId = null;
-    req.flash('sucess', 'Log out sucessful');
+    req.flash('success', 'Log out sucessful');
     res.redirect('/');
 }
