@@ -1,4 +1,4 @@
-nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
+nav.navbar.fixed-top.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(href='/') ChitChat
   button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
     span.navbar-toggler-icon
@@ -8,7 +8,6 @@ nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
       li.nav-item
         a.nav-link(href='/') Home
       li.nav-item
-        a.nav-link(href='/about') About
       if isAuthenticated  
         li.nav-item.dropdown
           a.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Blogs
