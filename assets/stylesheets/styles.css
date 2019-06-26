@@ -2,12 +2,12 @@ html,
 body {
   height: 100%;
   width: 100%;
-  
+  background-color: #598f36;
 }
 
 .home-cta {
-  background-color: #598f36;
   background-image: url('/images/chitchat.png');
+  background-size: cover;
   height: 100%;
   width: 100%;
   display: flex;
@@ -25,11 +25,64 @@ body {
   margin-top: 60px;
 }
 
+.form-group {
+  margin-top: 60px;
+}
+
 .container {
-  margin-top: 60 px;
+  margin-top: 60px;
+  color: #fff;
 }
 
 .box {
   overflow: auto;
   height: 400px;
 }
+
+.table-striped {
+  color: #fff;
+}
+
+.backdiv {
+  background-color: #224518;
+}
+
+.user {
+  text-align: center;
+}
+
+.destroy {
+  display: inline;
+}
+
+.destroy > input[type="submit"] {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #007bff;
+}
+
+.destroy:hover > input[type="submit"] {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.flash {
+  margin-top: 60px;
+}
+
+.nav-destroy>input[type="submit"] {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #be5f4a;
+  display: block;
+  padding: .5rem 0.5rem;
+}
+
+.nav-destroy:hover>input[type="submit"] {
+  color: rgba(0, 0, 0, .7);
+}
+

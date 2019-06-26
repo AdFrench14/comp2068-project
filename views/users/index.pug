@@ -2,20 +2,22 @@ extends ../layouts/main.pug
 block content
   .container
     header
-      h1= title
+      h1.user Profile
 
-    div
+    div.backdiv
       table.table.table-striped
         thead
           tr
-            th User 
+            td User
         
         tbody
           each user in users
             tr
               td= `${user.firstName} ${user.lastName}`
+            tr  
               td
                 =user.email
+            tr    
               td
                 a(href=`/users/${user.id}/edit`) edit
                 = ` | `

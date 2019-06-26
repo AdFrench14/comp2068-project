@@ -1,11 +1,11 @@
-form(action=(conversation ? `/conversations/update` : "/conversations"), method="POST")
+form(action=(message ? `/messages/update` : "/messages"), method="POST")
   if user
     input(type="hidden", name="id", value=user.id)
 
   .form-group
     label Content
     textarea.form-control(name="conversation[content]")
-      = conversation ? conversation.content : null
+      = message ? message.content : null
 
   .form-group
     button.btn.btn-dark(type="submit") Submit
