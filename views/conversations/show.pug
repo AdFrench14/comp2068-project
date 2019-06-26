@@ -1,1 +1,8 @@
 extends ../layouts/main.pug
+block content
+  .container
+    header
+      h1= conversation.title
+
+    div
+      = conversation.content || "Your story is processing..."

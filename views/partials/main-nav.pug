@@ -13,14 +13,9 @@ nav.navbar.fixed-top.navbar-expand-lg.navbar-dark.bg-dark
           a.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Conversations
           .dropdown-menu
             a.dropdown-item(href='/conversations/') Conversations
-            //a.dropdown-item(href='//users') Contacts
             a.dropdown-item(href='/conversations/new') +
-      li.nav-item
-      if isAuthenticated  
-        li.nav-item.dropdown      
-          a.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') User
-          .dropdown-menu 
-            a.dropdown-item(href='/users') Profiles          
+      li.nav-item      
+        a.nav-link(href='/users/') Profile         
       if !isAuthenticated    
         li.nav-item
           a.nav-link(href='/users/new') Register

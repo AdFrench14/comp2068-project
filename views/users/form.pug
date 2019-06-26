@@ -1,4 +1,4 @@
-form(action=(conversations ? `/users/update` : "/users"), method="POST")
+form(action=(user ? `/users/update` : "/users"), method="POST")
   if user
     input(type="hidden", name="id", value=user.id)
 
