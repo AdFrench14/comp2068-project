@@ -1,1 +1,22 @@
-//will list all the messages
+extends ../layouts/main.pug
+
+block content
+  .container
+    header
+      h1= title
+
+    div
+      table.table.table-striped
+        thead
+          tr
+            th user
+            th message
+
+        tbody
+          each message in conversations
+            tr
+              td
+                a(href=`/conversations/${conversation.id}`)= conversation.title 
+              td= conversation.status
+              td= `${conversation.user.firstName} ${conversation.user.lastName}`
+              

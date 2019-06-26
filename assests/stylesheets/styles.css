@@ -7,4 +7,29 @@ body {
 
 .home-cta {
   background-color: #598f36;
+  background-image: url('/images/chitchat.png');
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-cta>h1 {
+  color: #fff;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  font-size: 5rem;
+}
+
+.content {
+  margin-top: 60px;
+}
+
+.container {
+  margin-top: 60 px;
+}
+
+.box {
+  overflow: auto;
+  height: 400px;
 }
