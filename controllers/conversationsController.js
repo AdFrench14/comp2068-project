@@ -1,5 +1,6 @@
 //Delivers a list of the conversations to the user
 const Conversation = require('../models/conversation');
+const User = require('../models/user');
 
 exports.new = (req, res) => {
     res.render('conversations/new', {
@@ -8,7 +9,25 @@ exports.new = (req, res) => {
   };
 
 exports.create = (req, res) => {
-    Conversation.create(req.body.conversation)
+    
+    //Conversation should have 2 users associated with it
+    //both should be owners, no need for distinction between initiator/recipient
+
+    //parse username from the req.body.recipient
+    //get that recipient's userId from the user db
+    //get the initiator's userId from the session
+    //save both userIds in the conversation model users[] array
+
+    //create helper method in the user schema to retriev based on user name
+    //create helper method in the user schema to retriev based on userId
+
+    conversation = {
+        users: [User.findById(req.session.userId), User.findOne({email: req.body.email})],
+        messages: []
+    }
+
+    //Conversation.create(req.body.conversation)
+    Conversation.create(conversation)
         .then(() => {
             req.flash('success', "Conversation created successfully");
             req.redirect('/conversations/index'); //should probably open the new conversation instead
