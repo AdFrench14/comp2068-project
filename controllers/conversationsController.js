@@ -19,11 +19,11 @@ exports.create = (req, res) => {
     Conversation.create(conversation)
         .then(() => {
             req.flash('success', "Conversation created successfully");
-            req.redirect('/conversations/index'); //should probably open the new conversation instead
+            req.redirect('/conversations'); //should probably open the new conversation instead
         })
         .catch(err => {
             req.flash('error', `Error: ${err}`);
-            res.redirect('/conversations/index');
+            res.redirect('/conversations');
         });
 }
 
@@ -45,7 +45,7 @@ exports.index = (req, res) => {
 
 //should redirect to messages/index I think to show the contents of the conversation
 exports.show = (req, res) => {
-    res.redirect('messages/index');
+    res.redirect('messages');
 }
 
 /*
@@ -65,11 +65,11 @@ exports.destroy = (req, res) => {
     })
         .then(() => {
             req.flash('success', "Conversation deleted");
-            req.redirect('/conversations/index');
+            req.redirect('/conversations');
         })
         .catch(err => {
             req.flash('error', `Error: ${err}`);
-            res.redirect('/conversations/index');
+            res.redirect('/conversations');
         });
 }
 
