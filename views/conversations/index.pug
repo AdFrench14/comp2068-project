@@ -15,16 +15,10 @@ block content
         tbody
           each conversation in conversations
             tr
-<<<<<<< HEAD
-              td
-                a(href=`/conversations/${conversation.id}`)= conversation.title 
-              td= `${conversation.user.firstName} ${conversation.user.lastName}`
-
-    form(action=`/conversations/new`, method="GET")
-          input.btn.btn-dark(type='submit', value="New")  
-=======
               td 
                 a(href=`/conversations/${conversation._id}`)= conversation.users.join(", ")
               td= "VALUE"
->>>>>>> master
+
+    form(action=`/conversations/new/`, method="GET")
+      input.btn.btn-dark(type='submit', value="New")
               
