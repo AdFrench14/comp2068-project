@@ -1,12 +1,7 @@
 //Delivers a list of the conversations to the user
 const Conversation = require('../models/conversation');
+const User = require('../models/user');
 
-/*
-//Don't know if needed, can include as part of conversations/index page
-exports.new = (req, res) => {
-
-}
-*/
 exports.new = (req, res) => {
     res.render('conversations/new', {
       title: 'New Conversation'
@@ -14,14 +9,36 @@ exports.new = (req, res) => {
   };
 
 exports.create = (req, res) => {
-    Conversation.create(req.body.conversation)
+    console.log(`session userId ${req.session.userId}`);
+    console.log(`email of recipient ${req.body.email}`);
+    console.log(`id of recipient ${User.findOne({email: req.body.email})}`);
+
+    console.log("CURRENT USER userId: " + User.findOne({_id: req.session.userId}));
+    /*
+    //temp conversation object that can be written to the DB
+    var conversation = new Conversation( {
+        users: [User.findById(req.session.userId), User.findOne({email: req.body.email})],
+        messages: []
+    });
+    */
+
+    var conversation = new Conversation;
+    /*var conversation = new Conversation;
+    conversation.users.push(User.findById(req.session.userId));
+    conversation.users.push(User.findOne({email:req.body.email}));*/
+    //conversation.save();
+    console.log("USERS IN CONVO: " + conversation.users[0]);
+
+    //Conversation.create(req.body.conversation)
+    Conversation.create(conversation)
         .then(() => {
             req.flash('success', "Conversation created successfully");
-            req.redirect('/conversations/index'); //should probably open the new conversation instead
+            console.log("Conversation created successfully");
+            req.redirect('/conversations'); //should probably open the new conversation instead
         })
         .catch(err => {
             req.flash('error', `Error: ${err}`);
-            res.redirect('/conversations/index');
+            res.redirect('/conversations');
         });
 }
 
@@ -41,9 +58,9 @@ exports.index = (req, res) => {
         });
 }
 
-//should redirect to messages/index I think to show the contents of the conversation
+//should redirect to messages index I think to show the contents of the conversation
 exports.show = (req, res) => {
-    res.redirect('messages/index');
+    res.redirect('/messages'); //this actually redirects to /conversations/messages
 }
 
 /*
@@ -63,11 +80,11 @@ exports.destroy = (req, res) => {
     })
         .then(() => {
             req.flash('success', "Conversation deleted");
-            req.redirect('/conversations/index');
+            req.redirect('/conversations');
         })
         .catch(err => {
             req.flash('error', `Error: ${err}`);
-            res.redirect('/conversations/index');
+            res.redirect('/conversations');
         });
 }
 

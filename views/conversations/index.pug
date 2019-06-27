@@ -9,16 +9,22 @@ block content
       table.table.table-striped
         thead
           tr
-            th User
-            th Message
+            th Participants
+            th Last Message
 
         tbody
-          each message in conversations
+          each conversation in conversations
             tr
+<<<<<<< HEAD
               td
                 a(href=`/conversations/${conversation.id}`)= conversation.title 
               td= `${conversation.user.firstName} ${conversation.user.lastName}`
 
     form(action=`/conversations/new`, method="GET")
           input.btn.btn-dark(type='submit', value="New")  
+=======
+              td 
+                a(href=`/conversations/${conversation._id}`)= conversation.users.join(", ")
+              td= "VALUE"
+>>>>>>> master
               

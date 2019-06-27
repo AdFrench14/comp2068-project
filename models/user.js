@@ -58,6 +58,15 @@ UserSchema.methods.authenticate = function (plainPassword, callback) {
     });
 };
 
+/*
+//Query helper to get a user by specific userId
+UserSchema.query.userById = function(userId) {
+    return this.where({_id: userId});
+};
 
-
+//Query helpter to get a user by a specific email address
+UserSchema.query.userByEmail = function(userEmail) {
+    return this.where({email: userEmail});
+};
+*/
 module.exports = mongoose.model('User', UserSchema);
