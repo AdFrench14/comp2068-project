@@ -9,22 +9,11 @@ exports.new = (req, res) => {
   };
 
 exports.create = (req, res) => {
-    
-    //Conversation should have 2 users associated with it
-    //both should be owners, no need for distinction between initiator/recipient
-
-    //parse username from the req.body.recipient
-    //get that recipient's userId from the user db
-    //get the initiator's userId from the session
-    //save both userIds in the conversation model users[] array
-
-    //create helper method in the user schema to retriev based on user name
-    //create helper method in the user schema to retriev based on userId
-
-    conversation = {
+    //temp conversation object that can be written to the DB
+    var conversation = new Conversation( {
         users: [User.findById(req.session.userId), User.findOne({email: req.body.email})],
         messages: []
-    }
+    });
 
     //Conversation.create(req.body.conversation)
     Conversation.create(conversation)

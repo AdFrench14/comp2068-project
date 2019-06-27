@@ -1,9 +1,14 @@
 extends ../layouts/main.pug
 
 block content
-  .container
-    header
-      h1 New Conversation
+    .container
+        header
+            h1 New Conversation
 
-    div
-     
+        form(action="/conversations", method="POST")
+            .form-group
+                label Recipient Email 
+                input.form-control(type="email", name="userEmail")
+
+            .form-group
+                button.btn.btn-dark(type="submit") Submit
