@@ -3,6 +3,16 @@ extends ../layouts/main.pug
 block content
   .container
     header
-      h1= title
+      h1.user ChitChat
 
     div.box
+      table.table.table-striped   
+        tbody
+          each message in messages
+            tr
+              th.text-message
+            tr  
+              td= `${conversation.user.firstName} ${conversation.user.lastName}`
+              td= `${message.id}`
+                
+
