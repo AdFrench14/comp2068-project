@@ -9,26 +9,54 @@ exports.new = (req, res) => {
   };
 
 exports.create = (req, res) => {
-    console.log(`session userId ${req.session.userId}`);
-    console.log(`email of recipient ${req.body.email}`);
-    console.log(`id of recipient ${User.findOne({email: req.body.email})}`);
-
-    console.log("CURRENT USER userId: " + User.findOne({_id: req.session.userId}));
-    /*
+    //Find the recipient in the database
+    User.findOne({email: req.body.email})
+        .then(recipient => {
+            return recipient._id;
+        })
+        .then((recipientId => {
+            //Create a new conversation whose owners are the current session user and recipient
+            Conversation.create(new Conversation({
+                users: [req.session.userId, recipientId],
+                message: [] //empty conversation
+            }))
+                .then(()=> {
+                    req.flash('success', "Conversation created successfully");
+                    console.log("Conversation created successfully");
+                    res.redirect('/conversations'); //should probably open the new conversation instead
+                })
+                .catch(err => {
+                    req.flash('err', `${err}`);
+                    res.redirect('/conversations/new');
+                });
+    }))
+        .catch(err => {
+            req.flash('error', `Could not find the recipient: ${err}`);
+            res.redirect('/conversations/new');
+    });
+   /* 
+    Conversation.create(new Conversation({
+                users: [req.session.userId, recipient._id],
+                message: [] //empty conversation
+            }))
+                .then(()=> {
+                    req.flash('success', "Conversation created successfully");
+                    console.log("Conversation created successfully");
+                    req.redirect('/conversations'); //should probably open the new conversation instead
+                })
+                .catch(err => {
+                    req.flash('err', `${err}`);
+                    res.redirect('/conversations/new');
+                });
+                */
     //temp conversation object that can be written to the DB
+    /*j
     var conversation = new Conversation( {
-        users: [User.findById(req.session.userId), User.findOne({email: req.body.email})],
+        users: [req.session.userId, recipientId],
         messages: []
     });
     */
-
-    var conversation = new Conversation;
-    /*var conversation = new Conversation;
-    conversation.users.push(User.findById(req.session.userId));
-    conversation.users.push(User.findOne({email:req.body.email}));*/
-    //conversation.save();
-    console.log("USERS IN CONVO: " + conversation.users[0]);
-
+    /*
     //Conversation.create(req.body.conversation)
     Conversation.create(conversation)
         .then(() => {
@@ -40,6 +68,7 @@ exports.create = (req, res) => {
             req.flash('error', `Error: ${err}`);
             res.redirect('/conversations');
         });
+        */
 }
 
 exports.index = (req, res) => {
