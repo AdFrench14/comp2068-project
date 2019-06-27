@@ -5,4 +5,14 @@ block content
     header
       h1= title
 
-    div.box
+    //- div.user-container
+    //-   p= message.user
+
+    div.backdiv
+      table.table.table-striped   
+        tbody
+          each message in conversations
+            tr
+              td= `${conversation.user.firstName} ${conversation.user.lastName}`
+                
+

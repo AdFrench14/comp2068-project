@@ -17,6 +17,8 @@ block content
             tr
               td
                 a(href=`/conversations/${conversation.id}`)= conversation.title 
-              td= conversation.status
               td= `${conversation.user.firstName} ${conversation.user.lastName}`
+
+    form(action=`/conversations/new`, method="GET")
+          input.btn.btn-dark(type='submit', value="New")  
               
