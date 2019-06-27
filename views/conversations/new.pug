@@ -1,13 +1,9 @@
 extends ../layouts/main.pug
 
-form(action=(conversation ? `/conversations/update` : "/conversations"), method="POST")
-  if user
-    input(type="hidden", name="id", value=user.id)
+block content
+  .container
+    header
+      h1 New Conversation
 
-  .form-group
-    label Content
-    textarea.form-control(name="conversation[content]")
-      = conversation ? conversation.content : null
-
-  .form-group
-    button.btn.btn-dark(type="submit") Submit
+    div
+     
