@@ -28,7 +28,6 @@ exports.create = (req, res) => {
 exports.show = (req, res) => {
     User.findOne({
             _id: req.params.id,
-            user: req.session.userId
         })
         .then((user) => {
             res.render('users/show', {
@@ -62,7 +61,6 @@ exports.index = (req, res) => {
 exports.edit = (req, res) => {
     User.findOne({
             _id: req.params.id,
-            user: req.session.userId
         })
         .then(user => {
             res.render('users/edit', {
@@ -80,7 +78,6 @@ exports.edit = (req, res) => {
 exports.update = (req, res) => {
     User.updateOne({
             _id: req.params.id,
-            user: req.session.userId
         }, req.body.user, {runValidators: "true"})
         .then(() => {
             req.flash('success', "User updated sucessfully");
@@ -99,7 +96,6 @@ exports.update = (req, res) => {
 exports.destroy = (req, res) => {
     User.deleteOne({
             _id: req.params.id,
-            user: req.session.userId
         })
         .then(() => {
             req.flash('success', 'User sucessfully deleted');

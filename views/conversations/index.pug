@@ -16,7 +16,6 @@ block content
           each conversation in conversations
             tr
               td 
-                a(href=`/conversations/${conversation._id}`)= "USERS"
-                //conversation.users.join(", ")
+                a(href=`/conversations/${conversation._id}`)= conversation.users.join(", ")
               td= "VALUE"
               
