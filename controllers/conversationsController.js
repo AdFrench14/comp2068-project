@@ -43,9 +43,9 @@ exports.index = (req, res) => {
         });
 }
 
-//should redirect to messages/index I think to show the contents of the conversation
+//should redirect to messages index I think to show the contents of the conversation
 exports.show = (req, res) => {
-    res.redirect('messages');
+    res.redirect('/messages'); //this actually redirects to /conversations/messages
 }
 
 /*

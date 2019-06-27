@@ -9,14 +9,14 @@ block content
       table.table.table-striped
         thead
           tr
-            th User
-            th Message
+            th Participants
+            th Last Message
 
         tbody
-          each message in conversations
+          each conversation in conversations
             tr
-              td
-                a(href=`/conversations/${conversation.id}`)= conversation.title 
-              td= conversation.status
-              td= `${conversation.user.firstName} ${conversation.user.lastName}`
+              td 
+                a(href=`/conversations/${conversation._id}`)= "USERS"
+                //conversation.users.join(", ")
+              td= "VALUE"
               
