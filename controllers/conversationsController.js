@@ -7,6 +7,11 @@ exports.new = (req, res) => {
 
 }
 */
+exports.new = (req, res) => {
+    res.render('conversations/new', {
+      title: 'New Conversation'
+    });
+  };
 
 exports.create = (req, res) => {
     Conversation.create(req.body.conversation)
