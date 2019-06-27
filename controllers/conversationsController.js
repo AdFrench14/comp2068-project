@@ -1,12 +1,6 @@
 //Delivers a list of the conversations to the user
 const Conversation = require('../models/conversation');
 
-/*
-//Don't know if needed, can include as part of conversations/index page
-exports.new = (req, res) => {
-
-}
-*/
 exports.new = (req, res) => {
     res.render('conversations/new', {
       title: 'New Conversation'
