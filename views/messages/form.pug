@@ -2,10 +2,9 @@ form(action=(message ? `/messages/update` : "/messages"), method="POST")
   if user
     input(type="hidden", name="id", value=user.id)
 
-  .form-group
-    label Content
+  .form-group.text
     textarea.form-control(name="conversation[content]")
       = message ? message.content : null
 
-  .form-group
+  .form-group.text
     button.btn.btn-dark(type="submit") Submit
