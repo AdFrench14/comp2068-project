@@ -122,7 +122,7 @@ a {
   height: auto;
 }
 
-.name-row {
+.message-row {
   background-color: transparent !important;
 }
 
@@ -148,4 +148,20 @@ table th.chatter {
 
 textarea.form-control.message {
   width: 74%;
+}
+
+.convo-buttons {
+  vertical-align: top !important;
+}
+
+ul.nav.flex-column {
+  align-items: flex-end;
+}
+
+.dropdown-toggle::after {
+  display:none;
+}
+
+div.dropdown-menu {
+  text-align: center;
 }
