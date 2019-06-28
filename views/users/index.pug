@@ -2,7 +2,7 @@ extends ../layouts/main.pug
 block content
   .container
     header
-      h1.user Profile
+      h1.user Contacts
 
     div.backdiv
       table.table.table-striped
@@ -10,12 +10,10 @@ block content
           tr
             td User
             td Email
-            td Actions
         
         tbody
           each user in users
             tr
               td= `${user.firstName} ${user.lastName}`
               td= `${user.email}`
-              td
-                a(href=`/users/${user.id}/edit`) edit
+              
