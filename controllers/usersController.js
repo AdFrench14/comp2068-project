@@ -20,7 +20,7 @@ exports.create = (req, res) => {
         })
         .catch((err) => {
             req.flash('error', `Error: ${err}`);
-            req.redirect('/user/new');
+            res.redirect('/user/new');
         });
 }
 
