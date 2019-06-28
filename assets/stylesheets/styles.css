@@ -141,3 +141,11 @@ a {
   margin: 0px;
   color: #be5f4a;
 }
+
+table th.chatter {
+  border-top: 0px !important;
+}
+
+textarea.form-control.message {
+  width: 74%;
+}

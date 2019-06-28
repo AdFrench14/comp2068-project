@@ -13,8 +13,18 @@ block content
               td.user-name= `${message.user.firstName} ${message.user.lastName}`
             tr
               td.user-container= message.content
+            tr  
+              td
+                a(href=`/messages/${message.id}/edit`) edit
+                = ` | `
+                form.destroy(action=`/messages/destroy`, method="POST" onsubmit=`return confirm("Are you sure you want to delete this message?")`)
+                  input(type="hidden", name="id", value=message.id)
+                  input(type="submit", value="delete")
     div.box.right.bg-dark  
       table.table.table-striped.user
+        thead
+          tr
+            th.chatter Chatter Participants
         tbody
           each user in conversation.users
             tr.name-row  
