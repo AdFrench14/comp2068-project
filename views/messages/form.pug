@@ -2,10 +2,10 @@ form(action=(message ? `/messages/update` : "/messages"), method="POST")
   if message
     input(type="hidden", name="message[id]", value=message.id)
   
-  input(type="hidden", name="conversationId", value=conversation.id)
+  input(type="hidden", name="conversation[id]", value=conversation.id)
 
   .form-group.text
-    textarea.form-control(name="message[content]")
+    textarea.form-control.message(name="message[content]")
       = message ? message.content : null
 
   .form-group.text
