@@ -41,7 +41,6 @@ exports.create = (req, res) => {
 exports.edit = (req, res) => {
 
 }
-*/
 
 //Edit the text of a message
 exports.update = (req, res) => {
