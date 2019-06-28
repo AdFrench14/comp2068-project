@@ -27,7 +27,7 @@ exports.create = (req, res) => {
 exports.show = (req, res) => {
     req.isAuthenticated();
     User.findOne({
-            _id: req.params.id,
+            _id: req.session.userId,
         })
         .then((user) => {
             res.render('users/show', {
@@ -108,4 +108,3 @@ exports.destroy = (req, res) => {
             res.redirect('user/index');
         });
 }
-

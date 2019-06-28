@@ -173,3 +173,22 @@ td.heading {
 td.user-info {
   color: #e1ff90;
 }
+
+div.user-profile {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+div.user-profile.space {
+  padding-top: 50px;
+}
+
+div.profile-buttons {
+  text-align: end;
+  margin-right: 20px;
+}
+
+.break-word {
+  word-wrap: break-word;
+}
