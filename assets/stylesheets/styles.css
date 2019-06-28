@@ -165,3 +165,11 @@ ul.nav.flex-column {
 div.dropdown-menu {
   text-align: center;
 }
+
+td.heading {
+  font-weight: bold;
+}
+
+td.user-info {
+  color: #e1ff90;
+}

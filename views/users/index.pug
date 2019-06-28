@@ -8,12 +8,12 @@ block content
       table.table.table-striped
         thead
           tr
-            td User
-            td Email
+            td.heading User
+            td.heading Email
         
         tbody
           each user in users
             tr
-              td= `${user.firstName} ${user.lastName}`
-              td= `${user.email}`
+              td.user-info= `${user.firstName} ${user.lastName}`
+              td.user-info= `${user.email}`
               
