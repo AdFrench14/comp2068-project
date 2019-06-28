@@ -1,21 +1,35 @@
 extends ../layouts/main.pug
 
 block content
+
   .container
     header
       h1= title
+
+        form(action=`/conversations/new/`, method="GET")
+          input.btn.btn-dark(type='submit', value="New Conversation")
 
     div.backdiv
       table.table.table-striped
         thead
           tr
             th Participants
-            th Last Message
+            th Latest Message
+            th Actions
 
         tbody
           each conversation in conversations
             tr
-              td 
-                a(href=`/conversations/${conversation._id}`)= conversation.users.join(", ")
-              td= "VALUE"
-              
+              td
+                -for (let i = 0; i < conversation.users.length; i++)
+                  if(i != conversation.users.length -1)
+                    span= `${conversation.users[i].firstName} ${conversation.users[i].lastName}, `
+                  else
+                    span= `${conversation.users[i].firstName} ${conversation.users[i].lastName}`
+              td= conversation.messages[conversation.messages.length - 1]
+              td
+                a(href=`/conversations/$conversation._id`) open
+                = " | "
+                form.destroy(action=`/conversations/destroy`, method="POST", onsubmit=`return confirm("Are you sure you want to delete this conversation?")`)
+                  input(type="hidden", name="id", value=conversation.id)
+                  input(type="submit", value="delete")
