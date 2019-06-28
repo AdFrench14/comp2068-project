@@ -73,17 +73,46 @@ exports.create = (req, res) => {
 
 exports.index = (req, res) => {
     Conversation.find({
-        user: req.session.userId //need to be able to store more than one user this way
+        //conversations in which the current user is a participant
+        users: {$elemMatch: {$in: [req.session.userId]}}
     })
+    /*
         .then(conversations => {
+            //query for the names of the users involved in this conversation
+            console.log("Current session userId: " + req.session.userId);
+            
+            //get all the user ids that have been involved in a conversation
+            userIds = [];
+            for(let i = 0; i < conversations.length; i++) {
+                userIds.push(conversations[i].users);
+            }
+            console.log('users w duplicated: ' + userIds);
+            const uniqueUserIds = [... new Set(userIds)]; //remove duplicates by passing thorugh a Set
+            console.log('unique users: ' + uniqueUserIds);
+
+            //Find the corresponding user objects in the db
+            User.find({
+                _id: {$in: uniqueUserIds}
+            })
+                .then(users => {
+                    return conversations, users;
+                })
+                .catch(err => {
+                    console.log(`Could not find the conversation's users. ${err}`);
+                });
+        })
+        */
+        .populate('users')
+        .then((conversations) => {
             res.render('conversations/index', {
                 conversations: conversations,
                 title: "Conversations"
             });
         })
         .catch(err => {
-            req.flash('error', `Error: ${err}`);
+            req.flash('error', `Error finding conversations: ${err}`);
             res.redirect('/');
+            
         });
 }
 
@@ -109,7 +138,7 @@ exports.destroy = (req, res) => {
     })
         .then(() => {
             req.flash('success', "Conversation deleted");
-            req.redirect('/conversations');
+            res.redirect('/conversations');
         })
         .catch(err => {
             req.flash('error', `Error: ${err}`);
