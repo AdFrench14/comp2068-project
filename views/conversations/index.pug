@@ -26,7 +26,10 @@ block content
                     span= `${conversation.users[i].firstName} ${conversation.users[i].lastName}, `
                   else
                     span= `${conversation.users[i].firstName} ${conversation.users[i].lastName}`
-              td= conversation.messages[conversation.messages.length - 1].content
+              if(conversation.message)
+                td= conversation.messages[conversation.messages.length - 1].content
+              else
+                td= "No messages yet!"
               td
                 a(href=`/conversations/${conversation.id}`) open
                 = " | "

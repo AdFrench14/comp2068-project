@@ -57,20 +57,20 @@ exports.update = (req, res) => {
         })
         .catch(err => {
             req.flash('error', `Error: Can't update message`);
-            res.redirect(req.get('referer'))
+            res.redirect(`/conversations/${req.body.conversation.id}`);
         });
 }
 
 exports.destroy = (req, res) => {
-    Message.deleteOne({
-        _id: req.body.id
-        //not sure what else to query by here
-    })
-        .then(() => {
-            req.flash('success', "Message deleted");
-            res.redirect('/messages');
+    Conversation.findById(req.body.conversation.id)
+        .then(conversation => {
+            conversation.messages.id(req.body.message.id).remove();
+            conversation.save();
+            req.flash('success', `Message deleted`);
+            res.redirect(`/conversations/${req.body.conversation.id}`);
         })
         .catch(err => {
-            req.flash('error', `Error: ${err}`);
+            req.flash('error', `Error: Can't delete message`);
+            res.redirect(`/conversations/${req.body.conversation.id}`);
         });
 }
