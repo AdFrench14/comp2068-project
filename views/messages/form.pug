@@ -1,9 +1,11 @@
 form(action=(message ? `/messages/update` : "/messages"), method="POST")
-  if user
-    input(type="hidden", name="id", value=user.id)
+  if message
+    input(type="hidden", name="message[id]", value=message.id)
+  
+  input(type="hidden", name="conversationId", value=conversation.id)
 
   .form-group.text
-    textarea.form-control(name="conversation[content]")
+    textarea.form-control(name="message[content]")
       = message ? message.content : null
 
   .form-group.text

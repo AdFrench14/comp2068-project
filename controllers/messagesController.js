@@ -1,11 +1,4 @@
-const Message = require('../models/message');
-
-/*
-//Not really necessary
-exports.show = (req, res) => {
-    res.render()
-}
-*/
+var Conversation = require('../models/conversation');
 
 exports.index = (req, res) => {
     Message.find({
@@ -23,19 +16,23 @@ exports.index = (req, res) => {
         });
 }
 
-/*
-//Not necessary - will use a for on the conversation show page instead
-exports.new = (req, res) => {
-
-}
-*/
-
 exports.create = (req, res) => {
-    Message.create(req.body.message)
-        .then()
+    req.body.message.user = req.session.userId;
+    console.log("conversation ID: " + req.body.conversationId);
+    console.log("new message content: " + req.body.message.content);
+    console.log("new message user: " + req.body.message.user);
+
+    Conversation.findById(req.body.conversationId)
+        .then(conversation => {
+            console.log("Conversation object from db: " + conversation);
+            console.log("conversation messages from db: " + conversation.messages);
+            conversation.messages.push(req.body.message);
+            conversation.save();
+            res.redirect(req.get('referer'));
+        })
         .catch(err => {
-            req.flash('error', `Error: ${err}`);
-            res.redirect('/messages'); //should probably not do this - seems useless to redirect to the page we are currently on
+            req.flash('error', "Error writing message to the database");
+            res.redirect(req.get('referer'));
         });
 }
 

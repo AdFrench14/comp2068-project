@@ -22,7 +22,6 @@ exports.create = (req, res) => {
             }))
                 .then(()=> {
                     req.flash('success', "Conversation created successfully");
-                    console.log("Conversation created successfully");
                     res.redirect('/conversations'); //should probably open the new conversation instead
                 })
                 .catch(err => {
@@ -41,7 +40,7 @@ exports.index = (req, res) => {
         //conversations in which the current user is a participant
         users: {$elemMatch: {$in: [req.session.userId]}}
     })
-           .populate('users')
+        .populate('users')
         .then((conversations) => {
             res.render('conversations/index', {
                 conversations: conversations,
@@ -51,13 +50,24 @@ exports.index = (req, res) => {
         .catch(err => {
             req.flash('error', `Error finding conversations: ${err}`);
             res.redirect('/');
-            
         });
 }
 
-//should redirect to messages index I think to show the contents of the conversation
+//shows the contents of the conversation - all the messages
 exports.show = (req, res) => {
-    res.redirect('/messages'); //this actually redirects to /conversations/messages
+    //receives a conversation id. We need to display the correct message
+    Conversation.findById(req.params.id)
+        .then(conversation => {
+            req.flash('success', "Found the conversation");
+            res.render('messages/index', {
+                title: "Talk about it",
+                conversation: conversation
+            });
+        })
+        .catch(err => {
+            req.flash('error', `${err}`);
+            res.redirect('/conversations');
+        })
 }
 
 exports.destroy = (req, res) => {

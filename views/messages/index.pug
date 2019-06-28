@@ -8,12 +8,15 @@ block content
     div.box
       table.table.table-striped   
         tbody
-          each message in messages
+          //each message in messages
+          each message in conversation.messages
             tr
-              th.text-message
+              th.text-message= message.content
             tr  
-              td= `${conversation.user.firstName} ${conversation.user.lastName}`
-              td= `${message.id}`
+              td= "USER NAME"
+              // `${conversation.user.firstName} ${conversation.user.lastName}`
+              td= "Message ID"
+              //`${message.id}`
               
     include ./form.pug
 
