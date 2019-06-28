@@ -3,7 +3,7 @@ extends ../layouts/main.pug
 block content
   .container
     header
-      h1= `Edit ${user.id}`
+      h1.user= `Edit ${user.firstName}'s Profile`
 
     div
       include ./form.pug

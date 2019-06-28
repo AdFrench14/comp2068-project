@@ -3,20 +3,21 @@ extends ../layouts/main.pug
 block content
   .container
     header
-      h1 Profile 
+      h1.user Profile
+    div.user-container
 
-    div
-      =user.firstName
-    
-    div
-      =user.lastName
+      div.user-profile.space
+        =user.firstName
+      
+      div.user-profile
+        =user.lastName
 
-    div
-      =user.email
+      div.user-profile.break-word
+        =user.email
 
-    div  
-      a(href=`/users/${user.id}/edit`) edit
-      = ` | `
-      form.destroy(action=`/users/destroy`, method="POST" onsubmit=`return confirm("Are you sure you want to delete your account?")`)
-        input(type="hidden", name="id", value=user.id)
-        input(type="submit", value="delete")  
+      div.profile-buttons  
+        a(href=`/users/${user.id}/edit`) edit
+        = ` | `
+        form.destroy(action=`/users/destroy`, method="POST" onsubmit=`return confirm("Are you sure you want to delete your account?")`)
+          input(type="hidden", name="id", value=user.id)
+          input(type="submit", value="delete")  
