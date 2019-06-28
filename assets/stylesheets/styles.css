@@ -62,12 +62,12 @@ body {
   padding: 0;
   background: none;
   border: 0;
-  color: #007bff;
+  color: #be5f4a;
 }
 
 .destroy:hover > input[type="submit"] {
   text-decoration: underline;
-  color: #0056b3;
+  color: #be5f4a;
 }
 
 .flash {
@@ -106,3 +106,6 @@ body {
   margin: 20px;
 }
 
+a {
+  color: #be5f4a
+}
