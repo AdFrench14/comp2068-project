@@ -3,12 +3,14 @@ const Conversation = require('../models/conversation');
 const User = require('../models/user');
 
 exports.new = (req, res) => {
+    req.isAuthenticated();
     res.render('conversations/new', {
       title: 'New Conversation'
     });
   };
 
 exports.create = (req, res) => {
+    req.isAuthenticated();
     //Find the recipient in the database
     User.findOne({email: req.body.email})
         .then(recipient => {
@@ -36,6 +38,7 @@ exports.create = (req, res) => {
 }
 
 exports.index = (req, res) => {
+    req.isAuthenticated();
     Conversation.find({
         //conversations in which the current user is a participant
         users: {$elemMatch: {$in: [req.session.userId]}}
@@ -55,6 +58,7 @@ exports.index = (req, res) => {
 
 //shows the contents of the conversation - all the messages
 exports.show = (req, res) => {
+    req.isAuthenticated();
     //receives a conversation id. We need to display the correct message
     Conversation.findById(req.params.id)
         .populate('messages.user')
@@ -72,6 +76,7 @@ exports.show = (req, res) => {
 }
 
 exports.destroy = (req, res) => {
+    req.isAuthenticated();
     Conversation.deleteOne({
         _id: req.body.id
     })
