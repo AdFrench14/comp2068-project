@@ -37,15 +37,31 @@ exports.create = (req, res) => {
         });
 }
 
-/*
-//probably not necessary - can do this on the main conversation page
+//Render the page
 exports.edit = (req, res) => {
 
 }
 */
 
-//NOT IN USE
+//Edit the text of a message
 exports.update = (req, res) => {
+    Conversation.findOneAndUpdate(
+    { "_id": req.body._id, "messages._id": message._id },
+    { 
+        "$set": {
+            "messages.$.content": req.body.message.content 
+        }
+    })
+        .then(() => {
+            req.flash('success', `Message updated`);
+            res.redirect(req.get('referer'))
+        })
+        .catch(err => {
+            req.flash('error', `Error: Can't update message`);
+            res.redirect(req.get('referer'))
+        });
+
+
     Message.updateOne({
         _id: req.body.id,
         //not sure what else to query by here
