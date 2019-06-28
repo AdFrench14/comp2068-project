@@ -1,22 +1,5 @@
 var Conversation = require('../models/conversation');
 
-//NOT IN USE
-exports.index = (req, res) => {
-    Message.find({
-        conversation: req.params.id //need to figure out where we can store a convo id
-    })
-        .then(messages => {
-            res.render('messages/index', {
-                messages: messages,
-                title: "Messages" //could replace this with the actual conversation name
-            });
-        })
-        .catch(err => {
-            req.flash('error', `Error: ${err}`);
-            res.redirect('/conversations'); //return to the conversations list if can't load messages
-        });
-}
-
 exports.create = (req, res) => {
     req.body.message.user = req.session.userId;
     console.log("conversation ID: " + req.body.conversation.id);
