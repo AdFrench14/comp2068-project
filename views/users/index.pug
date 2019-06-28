@@ -10,9 +10,12 @@ block content
           tr
             td User
             td Email
+            td Actions
         
         tbody
           each user in users
             tr
               td= `${user.firstName} ${user.lastName}`
               td= `${user.email}`
+              td
+                a(href=`/users/${user.id}/edit`) edit
