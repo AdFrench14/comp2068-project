@@ -36,9 +36,21 @@ body {
 
 .box {
   overflow: auto;
+  margin-bottom: 20px;
   height: 400px;
+  border-radius: 5%;
+}
+
+.box.left {
+  float: left;
+  width: 75%;
   background-color: rgba(255,255,255,0.75);
-  border-radius: 10%;
+}
+
+.box.right {
+  float: right;
+  width: 20%;
+  background-color: #849c53;
 }
 
 .table-striped {
@@ -91,15 +103,8 @@ body {
 .user-container {
   background-color: #224518;
   color: #e1ff90;
-}
-
-.recipient {
-  background-color: #849c53;
-  color: #224418;
-}
-
-.text-message{
-  border-color: #0056b3;
+  border-radius: 15px;
+  margin: 10px 0;
 }
 
 .text {
@@ -108,4 +113,39 @@ body {
 
 a {
   color: #be5f4a
+}
+
+.table-striped.convo  {
+  margin: 0px 40px;
+  color: #be5f4a;
+  width: auto;
+  height: auto;
+}
+
+.name-row {
+  background-color: transparent !important;
+}
+
+.user-name {
+  font-style: italic;
+  vertical-align: bottom !important;
+  padding: 30px 10px 0px 10px !important;
+  border-top: 0px !important;
+}
+
+.user-name.side {
+  padding: 10px 10px 0px 10px !important;
+}
+
+.table-striped.user {
+  margin: 0px;
+  color: #be5f4a;
+}
+
+table th.chatter {
+  border-top: 0px !important;
+}
+
+textarea.form-control.message {
+  width: 74%;
 }
