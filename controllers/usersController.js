@@ -44,10 +44,11 @@ exports.show = (req, res) => {
 
 //Request list of all the registered users
 exports.index = (req, res) => {
+    req.isAuthenticated();
     User.find({
             //Filter db request by the session userId
-            user: req.session.userId
-        })
+            _id: req.session.userId            
+        })        
         .then((users) => res.render('users/index',{
             title: "Users",
             users: users
