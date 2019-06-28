@@ -45,7 +45,7 @@ exports.index = (req, res) => {
     req.isAuthenticated();
     User.find({
             //Filter db request by the session userId
-            _id: req.session.userId            
+            //_id: req.session.userId            
         })        
         .then((users) => res.render('users/index',{
             title: "Users",
