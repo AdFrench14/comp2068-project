@@ -25,27 +25,30 @@ exports.create = (req, res) => {
 
 //Request details on a single user
 exports.show = (req, res) => {
+    req.isAuthenticated();
     User.findOne({
             _id: req.params.id,
         })
         .then((user) => {
             res.render('users/show', {
-                title: "",
+                title: "Profile",
                 user: user //pass in the current user object to be displayed
             });
         })
         .catch((err) => {
             req.flash('error', `Error: ${err}`);
-            res.redirect('/user/index');
+            res.redirect('/');
         });
 }
 
 //Request list of all the registered users
 exports.index = (req, res) => {
+    req.isAuthenticated();
     User.find({
+   
             //Filter db request by the session userId
-            user: req.session.userId
-        })
+            //_id: req.session.userId            
+        })        
         .then((users) => res.render('users/index',{
             title: "Users",
             users: users
