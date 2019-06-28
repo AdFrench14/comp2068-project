@@ -19,11 +19,11 @@ exports.index = (req, res) => {
 
 exports.create = (req, res) => {
     req.body.message.user = req.session.userId;
-    console.log("conversation ID: " + req.body.conversationId);
+    console.log("conversation ID: " + req.body.conversation.id);
     console.log("new message content: " + req.body.message.content);
     console.log("new message user: " + req.body.message.user);
 
-    Conversation.findById(req.body.conversationId)
+    Conversation.findById(req.body.conversation.id)
         .then(conversation => {
             console.log("Conversation object from db: " + conversation);
             console.log("conversation messages from db: " + conversation.messages);
@@ -39,13 +39,30 @@ exports.create = (req, res) => {
 
 //Render the page
 exports.edit = (req, res) => {
+    console.log("received conversation id: " + req.params.convoId);
+    console.log("received message id: " + req.params.messageId);
 
+    Conversation.findOne({_id: req.params.convoId})
+        .then(conversation => {
+            console.log("CONVERSATION FOUND");
+            console.log('requested message: ' + conversation.messages.id(req.params.messageId));
+            req.flash('success', "Message found");
+            res.render(`messages/edit`, {
+                title: "Edit Message",
+                message: conversation.messages.id(req.params.messageId),
+                conversation: conversation
+        });
+    })
+        .catch(err => {
+            req.flash('error', "Error could not find the messaged");
+            req.redirect(req.get('referer'));
+        });
 }
 
 //Edit the text of a message
 exports.update = (req, res) => {
     Conversation.findOneAndUpdate(
-    { "_id": req.body._id, "messages._id": message._id },
+    { "_id": req.body.conversation.id, "messages._id": req.body.message.id },
     { 
         "$set": {
             "messages.$.content": req.body.message.content 
@@ -53,24 +70,11 @@ exports.update = (req, res) => {
     })
         .then(() => {
             req.flash('success', `Message updated`);
-            res.redirect(req.get('referer'))
+            res.redirect(`/conversations/${req.body.conversation.id}`);
         })
         .catch(err => {
             req.flash('error', `Error: Can't update message`);
             res.redirect(req.get('referer'))
-        });
-
-
-    Message.updateOne({
-        _id: req.body.id,
-        //not sure what else to query by here
-    }, req.body.message, {runValidators: true})
-        .then(() => {
-            //not sure that we need to anything. Probably just update the view??
-            res.redirect('/messages');
-        })
-        .catch(err => {
-            req.flash('error', `Error: ${err}`);
         });
 }
 
