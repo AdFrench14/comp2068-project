@@ -154,9 +154,14 @@ textarea.form-control.message {
   vertical-align: top !important;
 }
 
-div.menu {
-  width: 35px;
-  height: 5px;
-  background-color: black;
-  margin: 6px 0;
+ul.nav.flex-column {
+  align-items: flex-end;
+}
+
+.dropdown-toggle::after {
+  display:none;
+}
+
+div.dropdown-menu {
+  text-align: center;
 }
