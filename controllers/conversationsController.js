@@ -3,12 +3,14 @@ const Conversation = require('../models/conversation');
 const User = require('../models/user');
 
 exports.new = (req, res) => {
+    req.isAuthenticated();
     res.render('conversations/new', {
       title: 'New Conversation'
     });
   };
 
 exports.create = (req, res) => {
+    req.isAuthenticated();
     console.log(`session userId ${req.session.userId}`);
     console.log(`email of recipient ${req.body.email}`);
     console.log(`id of recipient ${User.findOne({email: req.body.email})}`);
@@ -43,6 +45,7 @@ exports.create = (req, res) => {
 }
 
 exports.index = (req, res) => {
+    req.isAuthenticated();
     Conversation.find({
         user: req.session.userId //need to be able to store more than one user this way
     })
@@ -60,6 +63,7 @@ exports.index = (req, res) => {
 
 //should redirect to messages index I think to show the contents of the conversation
 exports.show = (req, res) => {
+    req.isAuthenticated();
     res.redirect('/messages'); //this actually redirects to /conversations/messages
 }
 
@@ -75,6 +79,7 @@ exports.update = (req, res) => {
 */
 
 exports.destroy = (req, res) => {
+    req.isAuthenticated();
     Conversation.deleteOne({
         _id: req.body.id
     })
