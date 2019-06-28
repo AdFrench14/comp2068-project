@@ -9,19 +9,10 @@ block content
         thead
           tr
             td User
+            td Email
         
         tbody
           each user in users
             tr
               td= `${user.firstName} ${user.lastName}`
-            tr  
-              td
-                =user.email
-            tr    
-              td
-                a(href=`/users/${user.id}/edit`) edit
-                = ` | `
-                form.destroy(action=`/users/destroy`, method="POST", onsubmit='return confirm("Are you sure you would like to delete your account?")')
-                  input(type="hidden", name="id", value=`${user.id}`)
-                  input.destroy(type="submit", value="destroy")
-          
+              td= `${user.email}`
