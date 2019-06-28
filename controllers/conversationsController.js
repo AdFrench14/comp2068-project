@@ -57,6 +57,7 @@ exports.index = (req, res) => {
 exports.show = (req, res) => {
     //receives a conversation id. We need to display the correct message
     Conversation.findById(req.params.id)
+        .populate('messages.user')
         .then(conversation => {
             req.flash('success', "Found the conversation");
             res.render('messages/index', {

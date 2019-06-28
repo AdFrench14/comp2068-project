@@ -1,5 +1,6 @@
 var Conversation = require('../models/conversation');
 
+//NOT IN USE
 exports.index = (req, res) => {
     Message.find({
         conversation: req.params.id //need to figure out where we can store a convo id
@@ -28,7 +29,7 @@ exports.create = (req, res) => {
             console.log("conversation messages from db: " + conversation.messages);
             conversation.messages.push(req.body.message);
             conversation.save();
-            res.redirect(req.get('referer'));
+            res.redirect(req.get('referer')); //refresh the message/index page
         })
         .catch(err => {
             req.flash('error', "Error writing message to the database");
@@ -43,6 +44,7 @@ exports.edit = (req, res) => {
 }
 */
 
+//NOT IN USE
 exports.update = (req, res) => {
     Message.updateOne({
         _id: req.body.id,
