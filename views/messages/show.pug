@@ -1,0 +1,22 @@
+extends ../layouts/main.pug
+
+block content
+  .container
+    header
+      h1= `Message Details`
+
+    div
+      h2= "Conversation ID"
+      text= conversation.id
+
+    div
+      h2= "Message ID"
+      text= message.id
+
+    div
+      h2= "Message Sender ID"
+      text= message.user
+    
+    div
+      h2= "Message Content"
+      text= message.content

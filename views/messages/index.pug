@@ -12,7 +12,8 @@ block content
             tr.name-row  
               td.user-name= `${message.user.firstName} ${message.user.lastName}`
             tr
-              td.user-container= message.content
+              td.user-container
+                a(href=`/messages/${conversation.id}/${message.id}`)= message.content
             tr  
               td
                 a(href=`/messages/${conversation.id}/${message.id}/edit`) edit

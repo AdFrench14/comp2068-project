@@ -1,5 +1,21 @@
 var Conversation = require('../models/conversation');
 
+exports.show = (req, res) => {
+    Conversation.findOne({_id: req.params.convoId})
+        .then(conversation => {
+            req.flash('success', "Message found");
+            res.render(`messages/show`, {
+                title: "Edit Message",
+                message: conversation.messages.id(req.params.messageId),
+                conversation: conversation
+        });
+    })
+        .catch(err => {
+            req.flash('error', "Error could not find the messaged");
+            req.redirect(req.get('referer'));
+        });
+}
+
 exports.create = (req, res) => {
     req.body.message.user = req.session.userId;
     console.log("conversation ID: " + req.body.conversation.id);
