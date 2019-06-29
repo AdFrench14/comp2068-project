@@ -47,6 +47,7 @@ UserSchema.pre('save', function (next) {
     });
 });
 
+
 //Our helper method 
 //This will allow us to compare our password to plain text
 UserSchema.methods.authenticate = function (plainPassword, callback) {

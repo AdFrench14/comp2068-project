@@ -79,11 +79,11 @@ exports.edit = (req, res) => {
 //Update a users profile
 exports.update = (req, res) => {
     User.updateOne({
-            _id: req.params.id,
+            _id: req.body.id,
         }, req.body.user, {runValidators: "true"})
         .then(() => {
             req.flash('success', "User updated sucessfully");
-            res.redirect("user/home");
+            res.redirect("/");
         })
         .catch(err => {
             req.flash('error', `Error: ${err}`);
@@ -97,14 +97,14 @@ exports.update = (req, res) => {
 //delete a user
 exports.destroy = (req, res) => {
     User.deleteOne({
-            _id: req.params.id,
+            _id: req.body.id,
         })
         .then(() => {
             req.flash('success', 'User sucessfully deleted');
-            res.redirect('/user/index');
+            res.redirect('/logout');
         })
         .catch(err => {
             req.flash('error', "Error deleting user");
-            res.redirect('user/index');
+            res.redirect(req.get('referer'));
         });
 }

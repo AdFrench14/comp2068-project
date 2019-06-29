@@ -22,5 +22,4 @@ nav.navbar.fixed-top.navbar-expand-lg.navbar-dark.bg-dark
           a.nav-link(href='/login') Login 
       if isAuthenticated    
         li.nav-item
-        form.nav-destroy(action=`/logout`, method="POST")
-          input(type='submit', value="Logout")  
+          a.nav-link(href='/logout') Logout
