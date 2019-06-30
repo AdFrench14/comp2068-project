@@ -56,7 +56,7 @@ exports.index = (req, res) => {
         });
 }
 
-//shows the contents of the conversation - all the messages
+//shows the contents of the conversation - all the messages. Actually uses the messages/index view
 exports.show = (req, res) => {
     req.isAuthenticated();
     //receives a conversation id. We need to display the correct message
@@ -67,7 +67,8 @@ exports.show = (req, res) => {
             req.flash('success', "Found the conversation");
             res.render('messages/index', {
                 title: "Talk about it",
-                conversation: conversation
+                conversation: conversation,
+                sessionUserId: req.session.userId
             });
         })
         .catch(err => {

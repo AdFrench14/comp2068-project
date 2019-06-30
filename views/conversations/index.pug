@@ -26,7 +26,7 @@ block content
                     span= `${conversation.users[i].firstName} ${conversation.users[i].lastName}, `
                   else
                     span= `${conversation.users[i].firstName} ${conversation.users[i].lastName}`
-              if(conversation.message)
+              if(conversation.messages[0])
                 td= conversation.messages[conversation.messages.length - 1].content
               else
                 td= "No messages yet!"
